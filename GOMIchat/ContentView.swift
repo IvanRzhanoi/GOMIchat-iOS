@@ -27,7 +27,7 @@ struct ContentView: View {
                     leading: EditButton(),
                     trailing: Button(
                         action: {
-                            withAnimation { Event.create(in: self.viewContext) }
+//                            withAnimation { Event.create(in: self.viewContext) }
                         }
                     ) { 
                         Image(systemName: "plus")
@@ -40,34 +40,38 @@ struct ContentView: View {
 }
 
 struct MasterView: View {
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Event.timestamp, ascending: true)], 
-        animation: .default)
-    var events: FetchedResults<Event>
+//    @FetchRequest(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Event.timestamp, ascending: true)],
+//        animation: .default)
+//    var events: FetchedResults<Event>
 
+    var array = ["1", "2", "3"]
     @Environment(\.managedObjectContext)
     var viewContext
 
     var body: some View {
         List {
-            ForEach(events, id: \.self) { event in
+//            ForEach(events, id: \.self) { event in
+            ForEach(array, id: \.self) { element in
                 NavigationLink(
-                    destination: DetailView(event: event)
+                    destination: DetailView()
                 ) {
-                    Text("\(event.timestamp!, formatter: dateFormatter)")
+                    Text("Texto")
+                    //Text("\(event.timestamp!, formatter: dateFormatter)")
                 }
             }.onDelete { indices in
-                self.events.delete(at: indices, from: self.viewContext)
+                //self.events.delete(at: indices, from: self.viewContext)
             }
         }
     }
 }
 
 struct DetailView: View {
-    @ObservedObject var event: Event
+//    @ObservedObject var event: Event
 
     var body: some View {
-        Text("\(event.timestamp!, formatter: dateFormatter)")
+//        Text("\(event.timestamp!, formatter: dateFormatter)")
+        Text("Texto")
             .navigationBarTitle(Text("Detail"))
     }
 }
